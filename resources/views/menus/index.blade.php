@@ -54,34 +54,42 @@
                                 <tbody>
                                     @foreach($menus as $key => $menu) 
                                     <tr>
-                                        <td>{{ $menu->id }}</td>
-                                        <td><img class="rounded-circle" width="35" src="{{ asset('public/images/profile/small/pic1.jpg')}}" alt=""></td>
-                                        <td>{{ $menu->name }}</td>
-                                        <td>@if(!empty($menu->categories))
-                                                {{ $menu->categories->name }}
+                                        <td>{{ $menu['id'] }}</td>
+                                        <td><img class="rounded-circle" width="35" src="{{ $menu['image'] }}" alt=""></td>
+                                        <td>{{ $menu['name']}}</td>
+                                        <td>@if(!empty($menu['categories']))
+                                                @foreach($menu['categories'] as $category)
+                                                    @foreach($category as $category)
+                                                       <ul><li>{{$category}}</li></ul> 
+                                                    @endforeach 
+                                                @endforeach 
                                             @else
                                                 N/A
                                             @endif
                                         </td>
                                         <td>
-                                            @if(!empty($menu->stores))
-                                                {{ $menu->stores->name }}
+                                            @if(!empty($menu['stores']))
+                                                @foreach($menu['stores'] as $store)
+                                                    @foreach($store as $store)
+                                                    <ul><li>{{$store}}</li></ul> 
+                                                    @endforeach 
+                                                @endforeach 
                                             @else
                                                 N/A
                                             @endif
                                         </td>
-                                        <td>{{ $menu->prize }}</td>
-                                        <td>{{ $menu->description }}</td>
+                                        <td>{{ $menu['prize'] }}</td>
+                                        <td>{{ $menu['description'] }}</td>
                                         <td>
-                                            @if($menu->active == 1)
+                                            @if($menu['active'] == 1)
                                                 <button type="button" class="btn btn-success btn-sm">Available</button>                             
                                             @else
                                                 <button type="button" class="btn btn-warning btn-sm">Not Available</button>
                                             @endif
                                         <td>
                                             <div class="d-flex">
-                                                <a href="{{ route('table-edit', ['id' => $menu->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ url('/dashboard/'.$menu->id.'/menus')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('menu-edit', ['id' => $menu['id'] ]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ url('/dashboard/'.$menu['id'].'/menus')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                             </div>												
                                         </td>
                                         											

@@ -30,7 +30,7 @@ class MenuController extends Controller
 
     public function index(){
         try{
-            $menus = $this->menu->getAllMenus();
+            $menus = $this->menu->menuWithMultiID();
             $categories = $this->category->getAllCategories();
             $stores = $this->store->getAllStores();
             return view('menus.index', compact('menus', 'categories','stores'));
@@ -40,7 +40,7 @@ class MenuController extends Controller
     }
 
     public function add(Request $request){
-        //try{
+        try{
             
             $this->menu->id = $request->route()->parameter('id');
             if(!empty($this->menu->id)){
@@ -56,6 +56,8 @@ class MenuController extends Controller
                     return redirect()->back()->withErrors($validator)->withInput();
                 }
                 $data = $request->only('store_id','category_id','name','prize','description','image','active');
+                $data['store_id'] = implode(',', $data['store_id']);
+                $data['category_id'] = implode(',', $data['category_id']);
                 if($this->menu->saveMenu($this->menu, $data)){
                     Session::flash('success', $sucMsg);
                     return redirect()->route('menu');
@@ -67,9 +69,9 @@ class MenuController extends Controller
             $categories = $this->category->getAllCategories();
             $menus = $this->menu->getMenuDetail($this->menu);
             return view('menus.add', compact('menus','stores', 'categories'));
-        // }catch (\Exception $e) {
-        //     return redirect()->back()->with('warning', $e->getMessage());
-        // }
+        }catch (\Exception $e) {
+            return redirect()->back()->with('warning', $e->getMessage());
+        }
     }
 
     protected function getValidateMenu(Menu $menu, $data){

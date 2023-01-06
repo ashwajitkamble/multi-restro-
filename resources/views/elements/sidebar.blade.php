@@ -46,7 +46,7 @@
                             <span class="nav-text">Groups</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Add groups </a></li>
+                            <li><a href="{{route('role')}}">Add groups </a></li>
                             <li><a href="#">Manages groups </a></li>
                         </ul>
                     </li>

@@ -8,25 +8,25 @@
             <h5 class="modal-title">Add Menu</h5>
         </div>
         <div class="modal-body">
-            <form action="{{ route('menu-edit', ['id' => isset($menu->id) ? $menu->id : '']) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <form action="{{ route('menu-edit', ['id' => isset($menus->id) ? $menus->id : '']) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="basic-form">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="custom-file-label">Select Image</label>
-                            <input type="file" class="form-control custom-file-input" name="image">
+                            <input type="file" class="form-control custom-file-input" name="image" value="{{ old('image', isset($menus->image) ? $menus->image : '' ) }}">
                         </div>
                         <div class="form-group col-md-12">
-                            <label>Product Name </label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name', isset($menu->name) ? $menu->name : '' ) }}" placeholder="Enter Your Menu Item">
+                            <label>Product Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ old('name', isset($menus->name) ? $menus->name : '' ) }}" placeholder="Enter Your menus Item">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Price</label>
-                            <input type="text" name="prize" class="form-control" value="{{ old('prize', isset($menu->prize) ? $menu->prize : '' ) }}" placeholder="Enter Price">
+                            <input type="text" name="prize" class="form-control" value="{{ old('prize', isset($menus->prize) ? $menus->prize : '' ) }}" placeholder="Enter Price">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Description</label>
-                            <input type="text" name="description" class="form-control" value="{{ old('description', isset($menu->description) ? $menu->description : '' ) }}" placeholder="Enter Description">
+                            <input type="text" name="description" class="form-control" value="{{ old('description', isset($menus->description) ? $menus->description : '' ) }}" placeholder="Enter Description">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Select Restaurant </label>
