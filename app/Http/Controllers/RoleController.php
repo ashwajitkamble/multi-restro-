@@ -27,12 +27,12 @@ class RoleController extends Controller
 
     public function index()
     {	
-    	try{
+    	//try{
 	    	$allroles = $this->role->getListOfAllRoles();
 	    	return view('roles.index', compact('allroles'));
-	    }catch (\Exception $e) {
-            return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
-        }
+	    // }catch (\Exception $e) {
+        //     return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
+        // }
     }
 
     public function add(Request $request)
@@ -53,7 +53,7 @@ class RoleController extends Controller
 	        	$data['permissions']    = json_encode($permitData);
 	            if($this->role->saveRole($this->role, $data)){
 	                Session::flash('success', 'Role Successfully Saved !');
-	                return redirect()->route('role-list');
+	                return redirect()->route('role');
 	            }else{
 	                Session::flash('danger', 'Unable to Save Role..! Try Again');
 	            }

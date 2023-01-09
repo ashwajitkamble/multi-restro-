@@ -33,8 +33,8 @@ class moduleSeeder extends Seeder
                 'parent' => 0,
             ],
             [
-                'name' => 'List of Restaurants',
-                'parent' => 1,
+                'name' => 'Restaurants',
+                'parent' => 4,
             ],
             [
                 'name' => 'Tables',
@@ -42,7 +42,7 @@ class moduleSeeder extends Seeder
             ],
             [
                 'name' => 'Manages Tables',
-                'parent' => 1,
+                'parent' => 6,
             ],
             [
                 'name' => 'Category',
@@ -50,7 +50,7 @@ class moduleSeeder extends Seeder
             ],
             [
                 'name' => 'Manages Categories',
-                'parent' => 1,
+                'parent' => 8,
             ],
             [
                 'name' => 'Products',
@@ -58,7 +58,7 @@ class moduleSeeder extends Seeder
             ],
             [
                 'name' => 'Manages Products',
-                'parent' => 1,
+                'parent' => 10,
             ],
         ]);
     }

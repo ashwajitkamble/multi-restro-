@@ -45,6 +45,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/menu-add', [App\Http\Controllers\MenuController::class, 'add'])->name('menu-add');
     Route::match(['get', 'post'], '/menu-edit/{id?}',[App\Http\Controllers\MenuController::class, 'add'] )->name('menu-edit');
 
+    //User route
+    Route::get('/user', [App\Http\Controllers\userController::class, 'index'])->name('user');
+    Route::get('/user-add',  [App\Http\Controllers\userController::class, 'add'])->name('user-add');
+    Route::match(['get', 'post'], '/user-edit/{id?}',  [App\Http\Controllers\userController::class, 'add'])->name('user-edit');
 
     //Role route
     Route::get('/role', [App\Http\Controllers\RoleController::class, 'index'])->name('role');

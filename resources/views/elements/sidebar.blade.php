@@ -28,7 +28,7 @@
                             <span class="nav-text">Users</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="list-of-user.php">List of Users</a></li>
+                            <li><a href="{{ route('user')}}">List of Users</a></li>
                         </ul>
                     </li>
 

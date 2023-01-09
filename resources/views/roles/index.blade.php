@@ -24,7 +24,7 @@
             </div>
             {{-- @can('user-add') --}}
                 <div class="col-md-2">
-                    <a  href="{{ route('role-add')}} " type="button" class="btn btn-primary btn-rounded"  ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                    <a  href="{{ route('role-add')}} " type="button" class="btn btn-primary btn-rounded"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
                     </span>Add</a>
                 </div>
             {{-- @endcan --}}
@@ -44,9 +44,9 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Name</th>
-                                        @if(Gate::check('user-edit') || Gate::check('user-delete'))
+                                        {{-- @if(Gate::check('user-edit') || Gate::check('user-delete')) --}}
                                             <th>Action</th>
-                                        @endif
+                                        {{-- @endif --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,7 +57,7 @@
                                             <tr>
                                                 <td>{{ $count++ }}</td>
                                                 <td>{{ $role->name }}</td>
-                                                @if(Gate::check('user-edit') || Gate::check('user-delete'))
+                                                {{-- @if(Gate::check('user-edit') || Gate::check('user-delete')) --}}
                                                     <td>
                                                         <div class="btn-group">
                                                             {{-- @can('user-edit') --}}
@@ -68,7 +68,7 @@
                                                             {{-- @endcan --}}
                                                         </div>
                                                     </td>
-                                                @endif  
+                                                {{-- @endif   --}}
                                             </tr> 
                                         @endforeach
                                     @endif 
