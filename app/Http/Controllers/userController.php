@@ -17,7 +17,7 @@ class userController extends Controller
     public $exceptionRoute;
     public $role;
     public $user;
-    public $store;
+    public $store; 
 
     public function __construct(Role $role, User $user, Store $store){
         $this->exceptionRoute 	 = 'home';
