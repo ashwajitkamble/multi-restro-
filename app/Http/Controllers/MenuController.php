@@ -57,7 +57,6 @@ class MenuController extends Controller
                 }
                 $data = $request->only('store_id','category_id','name','prize','description','image','active');
                 $data['store_id'] = implode(',', $data['store_id']);
-                $data['category_id'] = implode(',', $data['category_id']);
                 if($this->menu->saveMenu($this->menu, $data)){
                     Session::flash('success', $sucMsg);
                     return redirect()->route('menu');

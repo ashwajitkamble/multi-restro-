@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label>Select Category </label>
-                            <select class="form-control select_group" id="category_id" name="category_id[]" multiple="multiple">
+                            <select class="form-control" id="category_id" name="category_id">
                                 @foreach($categories as $key => $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach                                  

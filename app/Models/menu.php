@@ -50,19 +50,13 @@ class menu extends Model
         $resultData=[];
         foreach ($saveResult as $key => $value) {
             $store_id    = explode(',', $value->store_id);
-            $category_id = explode(',', $value->category_id);
             $storeArr=[];
            foreach ($store_id as $store_id) {
              $store = Store:: where('id', $store_id)->first();
              $storeArr[]=[$store_id =>$store->name];
            }
-           $catArr= [];
-           foreach ($category_id as $category_id) {
-            $category = Store:: where('id', $category_id)->first();
-            $catArr[]= [$category_id =>$category->name];
-          }
+            $category = Category:: where('id', $value->category_id)->first();
           $value['stores'] = $storeArr;
-          $value['categories'] = $catArr;
           $resultData[]=[
             'id'            => $value->id,
             'store_id'      => $value->store_id,
@@ -72,8 +66,8 @@ class menu extends Model
             'description'   => $value->description,
             'image'         => asset('public/images/products/'). '/' .$value->image,
             'active'        => $value->active,
-            'stores'        =>$value->stores,
-            'categories'    =>$value->categories,
+            'stores'        => $value->stores,
+            'categories'    => $category->name,
           ];
         }
         return $resultData;

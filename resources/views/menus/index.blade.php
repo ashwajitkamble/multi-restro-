@@ -57,16 +57,7 @@
                                         <td>{{ $menu['id'] }}</td>
                                         <td><img class="rounded-circle" width="35" src="{{ $menu['image'] }}" alt=""></td>
                                         <td>{{ $menu['name']}}</td>
-                                        <td>@if(!empty($menu['categories']))
-                                                @foreach($menu['categories'] as $category)
-                                                    @foreach($category as $category)
-                                                       <ul><li>{{$category}}</li></ul> 
-                                                    @endforeach 
-                                                @endforeach 
-                                            @else
-                                                N/A
-                                            @endif
-                                        </td>
+                                        <td>{{$menu['categories']}}</td>
                                         <td>
                                             @if(!empty($menu['stores']))
                                                 @foreach($menu['stores'] as $store)
