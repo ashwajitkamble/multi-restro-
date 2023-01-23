@@ -29,7 +29,7 @@ class userController extends Controller
     public function index(){
         // try{
             $users = $this->user->getAllUsers();
-            $store = $this->store->getAllStoreList();
+            $store = $this->store->getAllStores();
             return view('users.index', compact('users','store'));
         // }catch (\Exception $e) {
         //     return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
@@ -57,7 +57,7 @@ class userController extends Controller
                 $data['is_active']  = !empty($request->is_active) ? true : false;
                 if($this->user->id != 0){
                     $this->user->roles()->sync([$request->only('role_id')]);
-                    $this->user->stores()->sync($request->only('store_id'));
+                    $this->user->stores()->sync([$request->only('store_id')]);
                 }
                 if($newuser = $this->user->saveUser($this->user, $data)){
                     $newuser->roles()->attach($request->role_id);

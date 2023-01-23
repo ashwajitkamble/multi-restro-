@@ -41,6 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Logo</th>
                                         <th>Name</th>
                                         <th>Action</th>
                                     </tr>
@@ -49,6 +50,7 @@
                                     @foreach($stores as $key => $storeValue) 
                                     <tr>
                                         <td>{{ $storeValue->id }}</td>
+                                        <td><img  class="rounded-circle" width="35" src="{{asset('public/images/stores/'). '/' .$storeValue->image }}" alt="{{ $storeValue->name }}"> </td>
                                         <td>{{ $storeValue->name }}</td>
                                         <td>
                                             <div class="d-flex">
@@ -80,13 +82,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('store-edit') }}" method="POST" autocomplete="off">
+                <form action="{{ route('store-edit') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     <div class="basic-form">
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label>Restaurant Name </label>
                                 <input type="text" name="name" class="form-control" placeholder="Enter Your Restaurant">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="custom-file-label">Restaurant Logo </label>
+                                <input type="file" name="image" class="form-control custom-file-input" value="{{ old('image', isset($store->image) ? $store->image : '' ) }}">
                             </div>
                         </div>
                     </div>

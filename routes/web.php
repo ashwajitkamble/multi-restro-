@@ -24,15 +24,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     //Store routes
-    Route::get('/store', [App\Http\Controllers\StoreController::class, 'index'])->name('store');
-    Route::get('/store-add', [App\Http\Controllers\StoreController::class, 'add'])->name('store-add');
-    Route::match(['get', 'post'], '/store-edit/{id?}',[App\Http\Controllers\StoreController::class, 'add'] )->name('store-edit');
+    Route::get('/store', [App\Http\Controllers\StoreController::class, 'index'])->name('store')->middleware('can:store');
+    Route::get('/store-add', [App\Http\Controllers\StoreController::class, 'add'])->name('store-add')->middleware('can:store-add');
+    Route::match(['get', 'post'], '/store-edit/{id?}',[App\Http\Controllers\StoreController::class, 'add'] )->name('store-edit')->middleware('can:store-edit');
 
     //Category routes
-    Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
-    Route::get('/category-add', [App\Http\Controllers\CategoryController::class, 'add'])->name('category-add');
-    Route::match(['get', 'post'], '/category-edit/{id?}',[App\Http\Controllers\CategoryController::class, 'add'] )->name('category-edit');
-
+    Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category')->middleware('can:category');
+    Route::get('/category-add', [App\Http\Controllers\CategoryController::class, 'add'])->name('category-add')->middleware('can:category-add');
+    Route::match(['get', 'post'], '/category-edit/{id?}',[App\Http\Controllers\CategoryController::class, 'add'] )->name('category-edit')->middleware('can:category-edit');
 
     //Table routes
     Route::get('/table', [App\Http\Controllers\TableController::class, 'index'])->name('table');

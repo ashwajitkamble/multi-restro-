@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 use Config;
 use DB;
 use File;
@@ -34,13 +35,13 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsTo('App\Models\role','role_users');
+        return $this->belongsToMany('App\Models\role','role_users');
     }
 
-    public function stores()
-    {
-        return $this->belongsTo('App\Models\store','store_id');
-    }
+    // public function stores()
+    // {
+    //     return $this->belongsToMany('App\Models\store','store_id');
+    // }
 
     public function hasAccess(array $permissions){
         foreach ($this->roles as $role) {
@@ -56,8 +57,13 @@ class User extends Authenticatable
     }
 
     public function getAllUsers(){
-       return User::orderBy('id', 'ASC')->where('status', 1)->with('stores','roles')->paginate(Config::get('constant.datalength'));
-        
+       return User::orderBy('id', 'ASC')->where('status', 1)->with('roles')->paginate(Config::get('constant.datalength'));
+    }
+
+    public function getTeacherEmp(){
+        return User::join('role_users', 'role_users.user_id', '=', 'users.id')
+                    ->where(['role_users.status' => 1,'role_users.role_id' => 1])
+                    ->get();
     }
 
     public function saveProfile(User $user, $data){

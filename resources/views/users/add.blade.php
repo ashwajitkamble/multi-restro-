@@ -4,7 +4,7 @@
 <?php use App\Http\Controllers\Controller; 
     $reqLabel = '<sup class="text-danger">*</sup>'; 
     $prevRoleId = !empty($user->roles[0]) ? $user->roles[0]->id : NULL;
-    $prevStoreId = !empty($user->stores) ? $user->stores[0]->id : NULL;
+    $prevStoreId = !empty($user->stores[0]) ? $user->stores[0]->id : NULL;
 ?> 
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

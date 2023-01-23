@@ -5,6 +5,14 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
+use App\Policies\Categoriespolicy;
+use App\Policies\Groupspolicy;
+use App\Policies\Orderspolicy;
+use App\Policies\Productspolicy;
+use App\Policies\Storepolicy;
+use App\Policies\Tablespolicy;
+use App\Policies\Userpolicy;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +33,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Categoriespolicy::categoryPolicies();
+        Groupspolicy::rolePolicies();
+        Orderspolicy::orderPolicy();
+        Productspolicy::menuPolicies();
+        Storepolicy::storePolicies();
+        Tablespolicy::tablePolicies();
+        Userpolicy::userPolicies();
     }
 }

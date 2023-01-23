@@ -11,7 +11,7 @@ use Auth;
 class store extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image'];
 
     public function getAllStores(){
         return Store::orderBy('id', 'ASC')->where('status', 1)->paginate(Config::get('constant.datalength'));
@@ -23,6 +23,10 @@ class store extends Model
 
     public function saveStore(Store $store, $data){
         $saveResult = false;
+        if (!empty($data['image'])) {
+            $saveFile = $data['image']->move(public_path('images/stores'), $data['image']->getClientOriginalName());
+            $data['image']   = !empty($data['image']) ? $data['image']->getClientOriginalName() : $oldImg;
+        }
         $saveResult = Store::updateOrCreate(['id' => isset($store->id) ? $store->id : 0], $data);
         return $saveResult;
     }

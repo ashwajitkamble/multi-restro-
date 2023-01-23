@@ -46,7 +46,7 @@ class StoreController extends Controller
                 if ($validator->fails()) {
                     return redirect()->back()->withErrors($validator)->withInput();
                 }
-                $data = $request->only('name');
+                $data = $request->only('name','image');
                 if($this->store->saveStore($this->store, $data)){
                     Session::flash('success', $sucMsg);
                     return redirect()->route('store');
