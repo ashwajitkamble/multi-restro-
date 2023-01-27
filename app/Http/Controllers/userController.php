@@ -61,7 +61,7 @@ class userController extends Controller
                 }
                 if($newuser = $this->user->saveUser($this->user, $data)){
                     $newuser->roles()->attach($request->role_id);
-                    $newuser->stores()->attach($request->store_id);
+                    //$newuser->stores()->attach($request->store_id);
                     Session::flash('success', $sucMsg);
                     return redirect()->route('user');
                 }else{

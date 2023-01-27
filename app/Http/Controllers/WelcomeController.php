@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Redirect;
 use App\Services\PayUService\Exception;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+
 use App\Models\Category;
+use App\Models\Welcome;
 use App\Models\Table;
 use App\Models\Menu;
 use App\Models\Store;
-use App\Models\Welcome;
 
 use Session;
 use QrCode;
@@ -33,14 +34,17 @@ class WelcomeController extends Controller
         $this->category          = $category;
     }
 
-   public function index(){
+    public function index(Request $request, $name){
+        $QrCode = QrCode::generate(route('welcome'. '/'.$name.'?'));
         $category = $this->welcome->menuDetail();
-        return  view('welcome', compact('category'));
-        
-    }
-    public function qrCode(){
         $store = $this->welcome->tableDetail();
-        return  view('qrCode', compact('store'));
+        $show = view('welcome', compact('category','store'));
+        return $QrCode;
+    }
+
+    public function qrCode(){
+        $store = $this->welcome->tableDetail();        
+        return view('qrCode', compact('store'));
         
     }
 }

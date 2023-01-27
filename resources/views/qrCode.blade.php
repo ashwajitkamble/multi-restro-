@@ -10,14 +10,14 @@
     @foreach ($store as $item)
        <h4>{{$item['store']}}</h4> 
        @foreach($item['tables'] as $table)
-       <ul>
-            <li>{{$table['name']}}</li>
-            <li>{{$table['qr-code']}}</li>
-       </ul>
-           
+        <ul>
+            <form action="{{ route('welcome', ['name' => $table['name']]) }}">
+                <li>{{$table['name']}}</li>
+                {{-- <li>{{ QrCode::generate(route('welcome')) }}</li> --}}
+                <input type="submit" value="{{$table['name']}}">
+            </form>            
+        </ul>
        @endforeach
-        
     @endforeach
-    
 </body>
 </html>

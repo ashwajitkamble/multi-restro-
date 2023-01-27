@@ -21,7 +21,7 @@ class welcome extends Model
                 $tableArr[] = [
                     'name' => $table->name,
                     'capacity' => $table->capacity,
-                    'qr-code' => QrCode::generate(route('welcome')),
+                     
                 ];
             }
             $storeArr[] = [

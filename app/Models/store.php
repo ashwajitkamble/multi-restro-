@@ -11,7 +11,7 @@ use Auth;
 class store extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'image'];
+    protected $fillable = ['name','image', 'owner','email', 'address', 'location'];
 
     public function getAllStores(){
         return Store::orderBy('id', 'ASC')->where('status', 1)->paginate(Config::get('constant.datalength'));

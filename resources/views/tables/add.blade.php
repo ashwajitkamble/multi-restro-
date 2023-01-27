@@ -17,7 +17,11 @@
                             <select id="inputState" name="store_id" class="form-control">
                                 <option selected value="null">Choose...</option>
                                 @foreach($stores as $store)
-                                    <option value="{{$store->id}}" @if($table->store_id == $store->id) selected @endif>{{$store->name}}</option>
+                                    <option value="{{$store->id}}" 
+                                        @if(Request::get('store_id') == $store->id)
+                                            selected 
+                                        @endif>
+                                        {{$store->name}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -24,9 +24,13 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary btn-rounded"  data-toggle="modal" data-target="#user-add"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
-                </span>Add</button>
-            </div>
+                @if(Gate::check('store-add'))
+                    @can('store-add')
+                    <a type="button"  href ="{{ route('store-add')}}" class="btn btn-primary btn-rounded" ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                    </span>Add</a>    
+                    @endcan
+                @endif
+                            </div>
         </div>
         <!-- row -->
         <div class="row">
@@ -43,22 +47,38 @@
                                         <th>ID</th>
                                         <th>Logo</th>
                                         <th>Name</th>
-                                        <th>Action</th>
+                                        <th>Owner</th>
+                                        <th>Email</th>
+                                        <th>address</th>
+                                        <th>location</th>
+                                        @if(Gate::check('store-edit'))
+                                            @can('store-edit')
+                                                <th>Action</th>
+                                            @endcan
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($stores as $key => $storeValue) 
                                     <tr>
                                         <td>{{ $storeValue->id }}</td>
-                                        <td><img  class="rounded-circle" width="35" src="{{asset('public/images/stores/'). '/' .$storeValue->image }}" alt="{{ $storeValue->name }}"> </td>
+                                        <td><img class="rounded-circle" width="35" src="{{asset('public/images/stores/'). '/' .$storeValue->image }}" alt="{{ $storeValue->name }}"> </td>
                                         <td>{{ $storeValue->name }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('store-edit', ['id' => $storeValue->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ url('/dashboard/'.$storeValue->id.'/stores')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                            </div>												
-                                        </td>
-                                        											
+                                        <td>{{ $storeValue->owner }}</td>
+                                        <td>{{ $storeValue->email }}</td>
+                                        <td>{{ $storeValue->address }}</td>
+                                        <td>{{ $storeValue->location }}</td>
+                                        @if(Gate::check('store-edit'))
+                                            @can('store-edit')
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a href="{{ route('store-edit', ['id' => $storeValue->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
+                                                        <a href="{{ url('/dashboard/'.$storeValue->id.'/stores')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    </div>												
+                                                </td>
+                                            @endcan
+                                        @endif
+                                         											
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -71,40 +91,4 @@
     </div>
 </div>
 <!--*****Content body End****-->
-
-<!-- model center start -->
-<div class="modal fade" id="user-add">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Restaurant</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('store-edit') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-                    @csrf
-                    <div class="basic-form">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label>Restaurant Name </label>
-                                <input type="text" name="name" class="form-control" placeholder="Enter Your Restaurant">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="custom-file-label">Restaurant Logo </label>
-                                <input type="file" name="image" class="form-control custom-file-input" value="{{ old('image', isset($store->image) ? $store->image : '' ) }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> 
-</div>
-<!-- model center End -->	
-
 @endsection

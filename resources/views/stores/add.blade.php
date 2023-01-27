@@ -20,6 +20,22 @@
                             <label class="custom-file-label">Restaurant Logo </label>
                             <input type="file" name="image" class="form-control custom-file-input" value="{{ old('image', isset($store->image) ? $store->image : '' ) }}">
                         </div>
+                        <div class="form-group col-md-12">
+                            <label>Owner's Name </label>
+                            <input type="text" name="owner" class="form-control" value="{{ old('owner', isset($store->owner) ? $store->owner : '' ) }}" placeholder="Enter Restaurant Owner">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Resaurant Official email </label>
+                            <input type="email" name="email" class="form-control" value="{{ old('email', isset($store->email) ? $store->email : '' ) }}" placeholder="Enter Restaurant Email">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Address</label>
+                            <input type="text" name="address" class="form-control" value="{{ old('address', isset($store->address) ? $store->address : '' ) }}" placeholder="Enter Restaurant Addrees">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>location</label>
+                            <input type="text" name="location" class="form-control" value="{{ old('location', isset($store->location) ? $store->location : '' ) }}" placeholder="Enter Restaurant location">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
