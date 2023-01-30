@@ -34,25 +34,27 @@ Route::group(['middleware' => 'web'], function () {
     Route::match(['get', 'post'], '/category-edit/{id?}',[App\Http\Controllers\CategoryController::class, 'add'] )->name('category-edit')->middleware('can:category-edit');
 
     //Table routes
-    Route::get('/table', [App\Http\Controllers\TableController::class, 'index'])->name('table');
-    Route::get('/table-add', [App\Http\Controllers\TableController::class, 'add'])->name('table-add');
-    Route::match(['get', 'post'], '/table-edit/{id?}',[App\Http\Controllers\TableController::class, 'add'] )->name('table-edit');
+    Route::get('/table', [App\Http\Controllers\TableController::class, 'index'])->name('table')->middleware('can:table');
+    Route::get('/table-add', [App\Http\Controllers\TableController::class, 'add'])->name('table-add')->middleware('can:table-add');
+    Route::match(['get', 'post'], '/table-edit/{id?}',[App\Http\Controllers\TableController::class, 'add'] )->name('table-edit')->middleware('can:table-edit');
 
     //Menu routes
-    Route::get('/menu', [App\Http\Controllers\MenuController::class, 'index'])->name('menu');
-    Route::get('/menu-add', [App\Http\Controllers\MenuController::class, 'add'])->name('menu-add');
-    Route::match(['get', 'post'], '/menu-edit/{id?}',[App\Http\Controllers\MenuController::class, 'add'] )->name('menu-edit');
+    Route::get('/menu', [App\Http\Controllers\MenuController::class, 'index'])->name('menu')->middleware('can:menu');
+    Route::get('/menu-add', [App\Http\Controllers\MenuController::class, 'add'])->name('menu-add')->middleware('can:menu-add');
+    Route::match(['get', 'post'], '/menu-edit/{id?}',[App\Http\Controllers\MenuController::class, 'add'] )->name('menu-edit')->middleware('can:menu-edit');
 
     //User route
-    Route::get('/user', [App\Http\Controllers\userController::class, 'index'])->name('user');
-    Route::get('/user-add',  [App\Http\Controllers\userController::class, 'add'])->name('user-add');
-    Route::match(['get', 'post'], '/user-edit/{id?}',  [App\Http\Controllers\userController::class, 'add'])->name('user-edit');
+    Route::get('/user', [App\Http\Controllers\userController::class, 'index'])->name('user')->middleware('can:user');
+    Route::get('/user-add',  [App\Http\Controllers\userController::class, 'add'])->name('user-add')->middleware('can:user-add');
+    Route::match(['get', 'post'], '/user-edit/{id?}',  [App\Http\Controllers\userController::class, 'add'])->name('user-edit')->middleware('can:user-edit');
 
     //Role route
-    Route::get('/role', [App\Http\Controllers\RoleController::class, 'index'])->name('role');
-    Route::get('/role-add', [App\Http\Controllers\RoleController::class, 'add'])->name('role-add');
-    Route::match(['get', 'post'], '/role-edit/{id?}', [App\Http\Controllers\RoleController::class, 'add'])->name('role-edit');
+    Route::get('/role', [App\Http\Controllers\RoleController::class, 'index'])->name('role')->middleware('can:role');
+    Route::get('/role-add', [App\Http\Controllers\RoleController::class, 'add'])->name('role-add')->middleware('can:role-add');
+    Route::match(['get', 'post'], '/role-edit/{id?}', [App\Http\Controllers\RoleController::class, 'add'])->name('role-edit')->middleware('can:role-edit');
 
+    //profile
+    Route::get('/profile', [App\Http\Controllers\userController::class, 'profile'])->name('profile');
 });
 
 Route::get('/test', function(){

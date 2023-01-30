@@ -105,4 +105,13 @@ class User extends Authenticatable
     public function getStoreName(){
         return !empty(session()->get('store_id')) ? Store::where('status', 1)->where('id', session()->get('store_id'))->select('id','name')->first()-> name : '';
     }
+
+    public function storeDetails(){
+        return $this->belongsTo('App\Models\store','store_id');
+    }
+
+    public function getUserWithId(){
+        $saveResult = User::where('id', Auth::user()->id)->with('storeDetails')->first();
+        return $saveResult;
+    }
 }

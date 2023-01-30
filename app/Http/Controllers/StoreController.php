@@ -67,11 +67,18 @@ class StoreController extends Controller
                 Rule::unique($store->getTable())->ignore($store->id)->where(function($query) {
                 $query->where('status', 1);
                 }),
-            ]
+            ],
+            'image' => 'image|mimes:jpeg,jpg,png,gif',
+            'owner' =>'required',
+            'address'=>'required',
         ];
         $errmsg = [
             'name.required' => 'Store name is required.',
-            'name.unique'   => 'Store name has been already taken.'
+            'name.unique'   => 'Store name has been already taken.',
+            'image.required' => 'Store image is required.',
+            'image.mimes' => 'Store image must be an image.',
+            'owner.required' => 'Store Owner is required.',
+            'address.required' => 'Store address is required.',
         ];
         return Validator::make($data, $rules, $errmsg);
     }

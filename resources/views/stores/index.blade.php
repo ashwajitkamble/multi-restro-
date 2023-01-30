@@ -26,11 +26,11 @@
             <div class="col-md-2">
                 @if(Gate::check('store-add'))
                     @can('store-add')
-                    <a type="button"  href ="{{ route('store-add')}}" class="btn btn-primary btn-rounded" ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
-                    </span>Add</a>    
+                        <a type="button"  href ="{{ route('store-add')}}" class="btn btn-primary btn-rounded" ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                        </span>Add</a>    
                     @endcan
                 @endif
-                            </div>
+            </div>
         </div>
         <!-- row -->
         <div class="row">
@@ -51,10 +51,8 @@
                                         <th>Email</th>
                                         <th>address</th>
                                         <th>location</th>
-                                        @if(Gate::check('store-edit'))
-                                            @can('store-edit')
-                                                <th>Action</th>
-                                            @endcan
+                                        @if(Gate::check('store-edit') || Gate::check('store-delete'))
+                                            <th>Action</th>
                                         @endif
                                     </tr>
                                 </thead>
@@ -68,17 +66,18 @@
                                         <td>{{ $storeValue->email }}</td>
                                         <td>{{ $storeValue->address }}</td>
                                         <td>{{ $storeValue->location }}</td>
-                                        @if(Gate::check('store-edit'))
-                                            @can('store-edit')
-                                                <td>
-                                                    <div class="d-flex">
+                                        @if(Gate::check('store-edit') || Gate::check('store-delete'))
+                                            <td>
+                                                <div class="d-flex">
+                                                    @can('store-edit')
                                                         <a href="{{ route('store-edit', ['id' => $storeValue->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
+                                                    @endcan
+                                                    @can('store-delete')
                                                         <a href="{{ url('/dashboard/'.$storeValue->id.'/stores')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                    </div>												
-                                                </td>
-                                            @endcan
-                                        @endif
-                                         											
+                                                    @endcan
+                                                </div>												
+                                            </td>
+                                        @endif 											
                                     </tr>
                                     @endforeach
                                 </tbody>

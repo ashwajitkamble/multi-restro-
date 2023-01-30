@@ -23,10 +23,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <a  href="{{ route('menu-add')}} " type="button" class="btn btn-primary btn-rounded"  ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
-                </span>Add</a>
-            </div>
+            @can('menu-add')
+                <div class="col-md-2">
+                    <a  href="{{ route('menu-add')}} " type="button" class="btn btn-primary btn-rounded"  ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                    </span>Add</a>
+                </div>
+            @endcan
         </div>
         <!-- row -->
         <div class="row">
@@ -48,7 +50,9 @@
                                         <th>Price</th>
                                         <th>Description</th>
                                         <th>Active</th>
-                                        <th>Action</th>
+                                        @if(Gate::check('menu-edit') || Gate::check('menu-delete'))
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,13 +81,19 @@
                                             @else
                                                 <button type="button" class="btn btn-warning btn-sm">Not Available</button>
                                             @endif
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('menu-edit', ['id' => $menu['id'] ]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ url('/dashboard/'.$menu['id'].'/menus')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                            </div>												
                                         </td>
-                                        											
+                                        @if(Gate::check('menu-edit') || Gate::check('menu-delete'))
+                                            <td>
+                                                <div class="d-flex">
+                                                    @can('menu-edit')
+                                                        <a href="{{ route('menu-edit', ['id' => $menu['id'] ]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
+                                                    @endcan
+                                                    @can('menu-delete')
+                                                        <a href="{{ url('/dashboard/'.$menu['id'].'/menus')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    @endcan
+                                                </div>												
+                                            </td>
+                                        @endif											
                                     </tr>
                                     @endforeach
                                 </tbody>

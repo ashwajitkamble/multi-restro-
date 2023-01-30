@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Store;
 use Session;
 use Hash;
+use Auth;
 
 
 class userController extends Controller
@@ -27,17 +28,17 @@ class userController extends Controller
     }
 
     public function index(){
-        // try{
+        try{
             $users = $this->user->getAllUsers();
             $store = $this->store->getAllStores();
             return view('users.index', compact('users','store'));
-        // }catch (\Exception $e) {
-        //     return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
-        // }
+        }catch (\Exception $e) {
+            return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
+        }
     }
 
     public function add(Request $request){	 
-        //try{
+        try{
             $this->user->id = $this->cryptString($request->route()->parameter('id'), "d");
             $user = $this->user->getuserDetail($this->user);
             if($request->isMethod('post')){
@@ -71,9 +72,14 @@ class userController extends Controller
             $stores = $this->store->getAllStoreList();
             $roles = $this->role->getRolesList();
             return view('users.add', compact('roles', 'user','stores'));
-        // }catch (\Exception $e) {
-        //     return redirect()->back()->with(['alertclass' => 'alert-warning', 'msg' => $e->getMessage()]);
-        // }
+        }catch (\Exception $e) {
+            return redirect()->back()->with(['alertclass' => 'alert-warning', 'msg' => $e->getMessage()]);
+        }
+    }
+
+    public function profile(){
+        $user = $this->user->getUserWithId();
+        return view('profile.index', compact('user'));
     }
 
     protected function getValidateUsers(User $user, $data){

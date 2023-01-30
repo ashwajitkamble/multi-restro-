@@ -49,10 +49,8 @@
                                         <th>Restaurant</th>
                                         <th>Capacity</th>
                                         <th>Availability</th>
-                                        @if(Gate::check('table-edit'))
-                                            @can('table-edit')
-                                                <th>Action</th>
-                                            @endcan
+                                        @if(Gate::check('table-edit') || Gate::check('table-delete'))
+                                            <th>Action</th>
                                         @endif
                                     </tr>
                                 </thead>
@@ -70,18 +68,18 @@
                                                 <button type="button" class="btn btn-warning btn-sm">Not Available</button>
                                             @endif
                                         </td>
-                                        @if(Gate::check('table-edit'))
-                                            @can('table-edit')
+                                        @if(Gate::check('table-edit') || Gate::check('table-delete'))
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="{{ route('table-edit', ['id' => $table->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{ url('/dashboard/'.$table->id.'/tables')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    @can('table-edit')
+                                                        <a href="{{ route('table-edit', ['id' => $table->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
+                                                    @endcan
+                                                    @can('table-delete')
+                                                        <a href="{{ url('/dashboard/'.$table->id.'/tables')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    @endcan
                                                 </div>												
                                             </td>
-                                            @endcan
-                                        @endif
-                                        
-                                        											
+                                        @endif  											
                                     </tr>
                                     @endforeach
                                 </tbody>

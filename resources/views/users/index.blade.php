@@ -22,10 +22,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <a  href="{{ route('user-add')}} " type="button" class="btn btn-primary btn-rounded"  ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
-                </span>Add</a>
-            </div>
+            @can('user-add')
+                <div class="col-md-2">
+                    <a  href="{{ route('user-add')}} " type="button" class="btn btn-primary btn-rounded"  ><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                    </span>Add</a>
+                </div>
+            @endcan
         </div>
         <!-- row -->
         <div class="row">

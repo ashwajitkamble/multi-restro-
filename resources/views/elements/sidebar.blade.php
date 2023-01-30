@@ -167,10 +167,10 @@
             <li>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-controls-3"></i>
-                    <span class="nav-text">Payments</span>
+                    <span class="nav-text">Profile</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="#">Payments</a></li>
+                    <li><a href="{{route('profile')}}">Profile</a></li>
                 </ul>
             </li>
 

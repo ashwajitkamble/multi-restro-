@@ -23,10 +23,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-primary btn-rounded"  data-toggle="modal" data-target="#user-add"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
-                </span>Add</button>
-            </div>
+            @can('user-add')
+                <div class="col-md-2">
+                    <a type="button" href ="{{route('menu-add')}}"class="btn btn-primary btn-rounded"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                    </span>Add</a>
+                </div>
+            @endcan
         </div>
         <!-- row -->
         <div class="row">
@@ -42,7 +44,9 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Action</th>
+                                        @if(Gate::check('category-edit') || Gate::check('category-delete'))
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,13 +54,18 @@
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('category-edit', ['id' => $category->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ url('/dashboard/'.$category->id.'/categories')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                            </div>												
-                                        </td>
-                                        											
+                                        @if(Gate::check('user-edit') || Gate::check('user-delete'))
+                                            <td>
+                                                <div class="d-flex">
+                                                    @can('user-edit')
+                                                        <a href="{{ route('category-edit', ['id' => $category->id]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i></a>
+                                                    @endcan
+                                                    @can('user-delete') 
+                                                        <a href="{{ url('/dashboard/'.$category->id.'/categories')}}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    @endcan    
+                                                </div>												
+                                            </td>
+                                        @endif											
                                     </tr>
                                     @endforeach
                                 </tbody>

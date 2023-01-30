@@ -22,12 +22,12 @@
                     </div>
                 </div>
             </div>
-            {{-- @can('user-add') --}}
+            @can('user-add')
                 <div class="col-md-2">
                     <a  href="{{ route('role-add')}} " type="button" class="btn btn-primary btn-rounded"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
                     </span>Add</a>
                 </div>
-            {{-- @endcan --}}
+            @endcan
             
         </div>
         <!-- row -->
@@ -44,9 +44,9 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Name</th>
-                                        {{-- @if(Gate::check('user-edit') || Gate::check('user-delete')) --}}
+                                        @if(Gate::check('user-edit') || Gate::check('user-delete'))
                                             <th>Action</th>
-                                        {{-- @endif --}}
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,18 +57,18 @@
                                             <tr>
                                                 <td>{{ $count++ }}</td>
                                                 <td>{{ $role->name }}</td>
-                                                {{-- @if(Gate::check('user-edit') || Gate::check('user-delete')) --}}
+                                                @if(Gate::check('user-edit') || Gate::check('user-delete'))
                                                     <td>
                                                         <div class="btn-group">
-                                                            {{-- @can('user-edit') --}}
+                                                            @can('user-edit')
                                                                 <a href="{{ route('role-edit', ['id' => $encyId]) }}" class="btn btn-primary shadow btn-xs sharp mr-1 "><i class="fa fa-pencil"></i>edit</a>
-                                                            {{-- @endcan
-                                                            @can('user-delete')  --}}
+                                                            @endcan
+                                                            @can('user-delete') 
                                                                 <a href="{{ url('/dashboard/'.$role->id.'/roles')}}" class="btn btn-primary shadow btn-xs sharp mr-1 " onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i>delete</a>
-                                                            {{-- @endcan --}}
+                                                            @endcan
                                                         </div>
                                                     </td>
-                                                {{-- @endif   --}}
+                                                @endif  
                                             </tr> 
                                         @endforeach
                                     @endif 
