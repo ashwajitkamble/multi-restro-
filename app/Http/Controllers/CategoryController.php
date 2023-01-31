@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Services\PayUService\Exception;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\category;
 use Session;
 
 class CategoryController extends Controller
@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public $exceptionRoute;
     public $Category;
 
-    public function __construct(Category $category){
+    public function __construct(category $category){
         $this->middleware('auth');
         $this->exceptionRoute    = 'home';
         $this->category          = $category;

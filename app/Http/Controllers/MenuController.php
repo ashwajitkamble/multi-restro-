@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Redirect;
 use App\Services\PayUService\Exception;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\Store;
-use App\Models\Category;
-use App\Models\Menu;
+use App\Models\store;
+use App\Models\category;
+use App\Models\menu;
 use Session;
 
 
@@ -20,7 +20,7 @@ class MenuController extends Controller
     public $category;
     public $store;
 
-    public function __construct(Menu $menu, Store $store, Category $category){
+    public function __construct(menu $menu, store $store, category $category){
         $this->middleware('auth');
         $this->exceptionRoute    = 'home';
         $this->menu              = $menu;

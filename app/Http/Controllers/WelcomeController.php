@@ -8,11 +8,11 @@ use App\Services\PayUService\Exception;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
-use App\Models\Category;
-use App\Models\Welcome;
-use App\Models\Table;
-use App\Models\Menu;
-use App\Models\Store;
+use App\Models\category;
+use App\Models\welcome;
+use App\Models\table;
+use App\Models\menu;
+use App\Models\store;
 
 use Session;
 use QrCode;
@@ -26,7 +26,7 @@ class WelcomeController extends Controller
     public $store;
     public $welcome;
 
-    public function __construct(Welcome $welcome, Menu $menu, Table $table, Store $store, Category $category){
+    public function __construct(welcome $welcome, menu $menu, table $table, store $store, category $category){
         $this->menu              = $menu;
         $this->store             = $store;
         $this->welcome           = $welcome;

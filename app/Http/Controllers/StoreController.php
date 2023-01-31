@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Services\PayUService\Exception;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\Store;
+use App\Models\store;
 use Session;
 
 class StoreController extends Controller
@@ -15,7 +15,7 @@ class StoreController extends Controller
     public $exceptionRoute;
     public $store;
 
-    public function __construct(Store $store){
+    public function __construct(store $store){
         $this->middleware('auth');
         $this->exceptionRoute    = 'home';
         $this->store             = $store;

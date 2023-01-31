@@ -8,8 +8,8 @@ use App\Services\PayUService\Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use App\Models\Module;
-use App\Models\Role;
+use App\Models\module;
+use App\Models\role;
 use Session;
 
 class RoleController extends Controller

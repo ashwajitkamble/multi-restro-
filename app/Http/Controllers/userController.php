@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use App\Services\PayUService\Exception;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Models\role;
 use App\Models\User;
-use App\Models\Store;
+use App\Models\store;
 use Session;
 use Hash;
 use Auth;
@@ -20,7 +20,7 @@ class userController extends Controller
     public $user;
     public $store; 
 
-    public function __construct(Role $role, User $user, Store $store){
+    public function __construct(role $role, User $user, store $store){
         $this->exceptionRoute 	 = 'home';
         $this->role 	         =  $role;
         $this->user 			 =  $user;

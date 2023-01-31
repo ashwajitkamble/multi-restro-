@@ -15,6 +15,6 @@ class Orderspolicy
      * @return void
      */
     public function orderPolicy(){
-        "ho";
+       
     }
 }
