@@ -25,7 +25,7 @@
             </div>
             @can('user-add')
                 <div class="col-md-2">
-                    <a type="button" href ="{{route('menu-add')}}"class="btn btn-primary btn-rounded"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                    <a type="button" href ="{{route('category-add')}}"class="btn btn-primary btn-rounded"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
                     </span>Add</a>
                 </div>
             @endcan

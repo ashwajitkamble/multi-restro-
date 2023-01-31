@@ -34,12 +34,11 @@ class WelcomeController extends Controller
         $this->category          = $category;
     }
 
-    public function index(Request $request, $name){
-        $QrCode = QrCode::generate(route('welcome'. '/'.$name.'?'));
+    public function index(){
         $category = $this->welcome->menuDetail();
         $store = $this->welcome->tableDetail();
         $show = view('welcome', compact('category','store'));
-        return $QrCode;
+        return $show ;
     }
 
     public function qrCode(){
