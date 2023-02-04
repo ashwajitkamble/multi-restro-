@@ -29,12 +29,18 @@
                         <p><strong>Contact :- {{ !empty($user) ? ucfirst($user->mobile) : '' }}</strong> </p>
                         <p><strong>Store Name  :- {{ !empty($user->storeDetails) ? ucfirst($user->storeDetails->name) : '' }}</strong> </p>
                         <p><strong>Store Address  :- {{ !empty($user->storeDetails) ? ucfirst($user->storeDetails->address) : '' }}</strong> </p>
-                        <p><strong>Store Address  :- {{ !empty($user->storeDetails) ? ucfirst($user->storeDetails->email) : '' }}</strong> </p>
-                        <p><strong>Store Qwner  :- {{ !empty($user->storeDetails) ? ucfirst($user->storeDetails->owner) : '' }}</strong> </p>                        
+                        <p><strong>Store Email Address  :- {{ !empty($user->storeDetails) ? ucfirst($user->storeDetails->email) : '' }}</strong> </p>
+                        <p><strong>Store Qwner  :- {{ !empty($user->storeDetails) ? ucfirst($user->storeDetails->owner) : '' }}</strong> </p>
+                                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 @endsection
+
+

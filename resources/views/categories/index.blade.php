@@ -49,10 +49,10 @@
                                         @endif
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody><?php $count = 1;?>
                                     @foreach($categories as $key => $category) 
                                     <tr>
-                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $count++ }}</td>
                                         <td>{{ $category->name }}</td>
                                         @if(Gate::check('user-edit') || Gate::check('user-delete'))
                                             <td>

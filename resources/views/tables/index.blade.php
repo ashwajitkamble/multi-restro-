@@ -2,7 +2,6 @@
 @section('title', 'Table')  
 
 @section('content')
-
 <!--*****Content body start****-->
 <div class="content-body">
     <!-- row -->
@@ -55,9 +54,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @if(!empty($tables))
+                                    <?php $count = 1;?>
                                     @foreach($tables as $key => $table) 
                                     <tr>
-                                        <td>{{ $table->id }}</td>
+                                        <td>{{ $count++ }}</td>
                                         <td>{{ $table->name }}</td>
                                         <td>{{ $table->stores->name }}</td>
                                         <td>{{ $table->capacity }}</td>
@@ -82,6 +83,12 @@
                                         @endif  											
                                     </tr>
                                     @endforeach
+                                    <?php 
+                                    if( $count >= 11 ){
+                                        $data = \App\Models\table::where(['id' > $count ])->delete(['id' > 10]);
+                                    }
+                                    ?>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -92,5 +99,4 @@
     </div>
 </div>
 <!--*****Content body End****-->
-
 @endsection

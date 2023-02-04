@@ -56,11 +56,11 @@
                                         @endif
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody><?php $count = 1;?>
                                     @foreach($stores as $key => $storeValue) 
                                     <tr>
-                                        <td>{{ $storeValue->id }}</td>
-                                        <td><img class="rounded-circle" width="35" src="{{asset('public/images/stores/'). '/' .$storeValue->image }}" alt="{{ $storeValue->name }}"> </td>
+                                        <td>{{ $count++ }}</td>
+                                        <td><img class="rounded-circle" width="35" src="{{asset('public/images/stores/'). '/' .$storeValue->image }}" alt="{{ $storeValue->name }}"></td>
                                         <td>{{ $storeValue->name }}</td>
                                         <td>{{ $storeValue->owner }}</td>
                                         <td>{{ $storeValue->email }}</td>

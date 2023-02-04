@@ -27,17 +27,17 @@ class RoleController extends Controller
 
     public function index()
     {	
-    	//try{
+    	try{
 	    	$allroles = $this->role->getListOfAllRoles();
 	    	return view('roles.index', compact('allroles'));
-	    // }catch (\Exception $e) {
-        //     return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
-        // }
+	    }catch (\Exception $e) {
+            return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
+        }
     }
 
     public function add(Request $request)
     {	 
-    	// try{
+    	try{
             $this->role->id = $this->cryptString($request->route()->parameter('id'), "d");
 	        if($request->isMethod('post')){
                 $validator = $this->getValidateRole($this->role,$request->all());
@@ -61,9 +61,9 @@ class RoleController extends Controller
 	    	$modules = $this->module->getModuleAndMethod();
 	    	$role = $this->role->getRoleDetail($this->role);
 	    	return view('roles.add', compact('modules', 'role'));
-	    // }catch (\Exception $e) {
-        // 	return redirect()->back()->with(['alertclass' => 'alert-warning', 'msg' => $e->getMessage()]);
-        // }
+	    }catch (\Exception $e) {
+            return redirect()->back()->with(['alertclass' => 'alert-warning', 'msg' => $e->getMessage()]);
+        }
     }
 
     protected function getValidateRole(Role $role, $data){

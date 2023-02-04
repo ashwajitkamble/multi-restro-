@@ -25,17 +25,17 @@ class TableController extends Controller
     }
 
     public function index(){
-        try{
+        //try{
             $tables = $this->table->getAllTables();
             $stores = $this->store->getAllStores();
             return view('tables.index', compact('tables', 'stores'));
-        }catch (\Exception $e) {
-            return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
-        }
+        // }catch (\Exception $e) {
+        //     return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
+        // }
     }
 
     public function add(Request $request){
-        //try{
+        try{
             
             $this->table->id = $request->route()->parameter('id');
             if(!empty($this->table->id)){
@@ -61,9 +61,9 @@ class TableController extends Controller
             $stores = $this->store->getAllStores();
             $table = $this->table->getTableDetail($this->table);
             return view('tables.add', compact('table','stores'));
-        // }catch (\Exception $e) {
-        //     return redirect()->back()->with('warning', $e->getMessage());
-        // }
+        }catch (\Exception $e) {
+            return redirect()->back()->with('warning', $e->getMessage());
+        }
     }
 
     protected function getValidateTable(Table $table, $data){
