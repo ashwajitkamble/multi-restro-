@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\WelcomeController::class, 'qrCode'] )->name('qrCode');
-Route::get('/welcome', [App\Http\Controllers\WelcomeController::class, 'index'] )->name('welcome');
+// Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'] )->name('we');
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'] )->name('welcome');
 
 Auth::routes();
 Route::group(['middleware' => 'web'], function () {

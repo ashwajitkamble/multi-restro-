@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Categoriespolicy::categoryPolicies();
         Groupspolicy::rolePolicies();
-        Orderspolicy::orderPolicy();
+        //Orderspolicy::orderPolicy();
         Productspolicy::menuPolicies();
         Storepolicy::storePolicies();
         Tablespolicy::tablePolicies();

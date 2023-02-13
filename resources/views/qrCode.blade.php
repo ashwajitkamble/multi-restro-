@@ -13,7 +13,6 @@
         <ul>
             <form action="{{ route('welcome', ['name' => $table['name']]) }}">
                 <li>{{$table['name']}}</li>
-                {{-- <li>{{ QrCode::generate(route('welcome')) }}</li> --}}
                 <input type="submit" value="{{$table['name']}}">
             </form>            
         </ul>

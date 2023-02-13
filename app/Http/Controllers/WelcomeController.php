@@ -15,7 +15,7 @@ use App\Models\menu;
 use App\Models\store;
 
 use Session;
-use QrCode;
+
 
 
 class WelcomeController extends Controller
@@ -41,9 +41,4 @@ class WelcomeController extends Controller
         return $show ;
     }
 
-    public function qrCode(){
-        $store = $this->welcome->tableDetail();        
-        return view('qrCode', compact('store'));
-        
-    }
 }

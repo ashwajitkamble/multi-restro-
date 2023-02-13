@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\table;
 use App\Models\store;
 use Session;
+use Auth;
 
 class TableController extends Controller
 {
@@ -25,10 +26,17 @@ class TableController extends Controller
     }
 
     public function index(){
-        //try{
-            $tables = $this->table->getAllTables();
-            $stores = $this->store->getAllStores();
-            return view('tables.index', compact('tables', 'stores'));
+        //try{              
+            if(Auth::user()->store_id == 0){
+                $tables = $this->table->getAllTables();
+                $stores = $this->store->getAllStores();
+                return view('tables.index', compact('tables', 'stores'));
+            }else{
+                $tables = $this->table->getTablesListWithStoreId(Auth::user()->store_id);
+                $stores = $this->store->getAllStores();
+                return view('tables.index', compact('tables', 'stores'));
+            }
+            
         // }catch (\Exception $e) {
         //     return redirect()->route($this->exceptionRoute)->with('warning', $e->getMessage());
         // }

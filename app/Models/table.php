@@ -27,7 +27,7 @@ class table extends Model
 
     public function saveTable(Table $table, $data){
         $saveResult = false;
-        $saveResult = Table::updateOrCreate(['id' => isset($table->id) ? $table->id : 0], $data);
+        $saveResult = Table::updateOrCreate(['id' => isset($table->id) ? $table->id : 0], $data)->take(10);
         return $saveResult;
     }
 
@@ -35,5 +35,12 @@ class table extends Model
         $tableDetail = false;
         $tableDetail = Table::where('id', isset($table->id) ? $table->id : 0)->first();
         return $tableDetail;
+    }
+
+    public function getTablesListWithStoreId($id){
+        $tableDetail = false;
+        $tableDetail = Table::where('store_id', isset($id) ? $id : 0)->where('status', 1)->where('availability', 1)->get();
+        return $tableDetail;
+
     }
 }

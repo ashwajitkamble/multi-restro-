@@ -25,8 +25,19 @@
             <div class="col-md-2">
                 @if(Gate::check('table-add'))
                     @can('table-add')
-                        <a type="button"  href="{{route('table-add')}}" class="btn btn-primary btn-rounded" ><i class="fa fa-plus color-primary"></i>
-                        </span>Add</a>
+                        @if (Auth::user()->store_id == 0)
+                            <a type="button"  href="{{route('table-add')}}" class="btn btn-primary btn-rounded" ><i class="fa fa-plus color-primary"></i>
+                            </span>Add</a>
+                        @else
+                            <?php $count = 1;?>
+                            @foreach($tables as $key => $table)
+                                <?php $count++;?>
+                            @endforeach
+                            @if($count <=10)
+                                <a type="button"  href="{{route('table-add')}}" class="btn btn-primary btn-rounded" ><i class="fa fa-plus color-primary"></i>
+                                </span>Add</a>
+                            @endif
+                        @endif
                     @endcan
                 @endif
             </div>
@@ -83,11 +94,6 @@
                                         @endif  											
                                     </tr>
                                     @endforeach
-                                    <?php 
-                                    if( $count >= 11 ){
-                                        $data = \App\Models\table::where(['id' > $count ])->delete(['id' > 10]);
-                                    }
-                                    ?>
                                 @endif
                                 </tbody>
                             </table>
